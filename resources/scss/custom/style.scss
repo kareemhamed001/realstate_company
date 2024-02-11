@@ -1,0 +1,262 @@
+@import 'variables';
+
+*{
+    font-family: 'DM sans',sans;
+}
+.heading-bold{
+    font-size: 30px;
+    font-weight: 800;
+    color:$bs-primary;
+    line-height: 100%;
+    font-family: 'DM sans',sans;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#content{
+width: 100%;
+}
+
+.heading-regular{
+    font-size: 30px;
+    font-weight: 500;
+    color:$bs-primary;
+    line-height: 100%;
+    font-family: 'DM sans',sans;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+#loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000000; /* Adjust the z-index as needed to make sure it overlays other elements */
+    position: fixed;
+}
+
+.heading {
+    font-size: 30px;
+    font-weight: 600;
+    color:$bs-primary;
+    line-height: 42px;
+    font-family: 'DM sans',sans;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-heading{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'DM sans',sans;
+    color:$bs-primary;
+    line-height: 30px;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.sidebar-item {
+    padding: 10px;
+    text-decoration: none;
+    color: $bs-gray;
+}
+
+.sidebar-item:hover {
+
+    color: $bs-primary;
+}
+
+.sidebar-item.active {
+
+    color: #2B3674;
+}
+
+#header {
+    width: auto;
+    height: 55px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    border-radius: 28px;
+    padding: 5px;
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    z-index: 1000;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.search-input {
+    border: 1px solid #e6e6e6;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 50px;
+    outline: 1px solid #e6e6e6;
+    padding: 7px 7px;
+
+}
+
+.search-input::placeholder {
+    color: #4d4d4d;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding-left: 10px;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.header-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #F4F7FE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+
+    cursor: pointer;
+}
+
+.header-item:hover {
+    background-color: #E9EEFF;
+}
+
+.sidebar-pages-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5% 7%;
+}
+
+.sidebar-separator {
+    width: 100%;
+    height: 1px;
+    background-color: #F4F7FE;
+    margin: 10px 0;
+}
+
+.custom-card{
+
+}
+.custom-btn{
+    border-radius: 50px;
+    padding: 5px 30px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.custom-btn:hover{
+    transform: scale(1.03);
+
+
+}
+
+.card-img-top{
+
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+.card-name{
+    word-break: break-all;
+}
+
+.card-description{
+    word-break: break-all;
+
+}
+.card-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+#sidebar{
+    height: 90%;
+
+}
+
+.custom-page-item{
+    padding: 1rem;
+    text-decoration: none;
+    color: $bs-gray;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM sans',sans;
+    line-height: 30px;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.custom-page-link:hover{
+    color: $bs-primary;
+}
+
+.custom-page-link{
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.custom-page-item.active{
+    color: $bs-primary;
+}
+.information-card{
+    background-color: white;
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+
+}
+
+.card-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #F4F7FE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+}
+
+.card-typography{
+    margin: 0 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-card-title{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: $bs-gray;
+}
+
+.custom-card-number{
+    font-size:24px;
+    font-weight: bold;
+    line-height: 32px;
+    color:#2B3674;
+}
+
+

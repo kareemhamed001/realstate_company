@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
+            $table->string('title')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('cover_image')->nullable();
             $table->timestamps();

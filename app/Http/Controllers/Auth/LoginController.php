@@ -3,24 +3,51 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    use ApiResponse;
+    public function showLoginPage()
+    {
+        return view('auth.login');
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function login(Request $request)
     {
-        //
+        $credentials = $request->only('email', 'password');
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            $token = $user->createToken('authToken')->plainTextToken;
+            return $this->apiResponse(['token' => $token],'success', 200);
+        }
+        return $this->apiResponse(null,'unauthenticated', 401);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    function checkValidToken(Request $request)
     {
-        //
+        $user=Auth::guard('sanctum')->user();
+        if($user){
+            return $this->apiResponse(null,'valid token', 200);
+        }
+        return $this->apiResponse(null,'unauthenticated', 401);
+    }
+
+    public function logout()
+    {
+
+        $user=Auth::guard('sanctum')->user();
+        if($user){
+            $user->tokens()->delete();
+            return $this->apiResponse(null,'logout success', 200);
+        }
+        return $this->apiResponse(null,'unauthenticated', 401);
     }
 
     /**

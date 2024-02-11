@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Partner extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    function getCoverImageAttribute()
+    {
+        return url($this->attributes['cover_image']);
+    }
 }

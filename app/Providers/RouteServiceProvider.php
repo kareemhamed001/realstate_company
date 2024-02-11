@@ -45,6 +45,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('dashboard/api')
                 ->group(base_path('routes/dashboard/dashboard.api.php'));
 
+            ///////////////////////////// auth routes  /////////////////////////////
+            Route::middleware('api')
+                ->prefix('auth/api')
+                ->group(base_path('routes/auth/auth.php'));
         });
     }
 
