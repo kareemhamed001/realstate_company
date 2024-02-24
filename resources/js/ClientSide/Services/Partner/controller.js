@@ -38,14 +38,11 @@ class PartnerController {
     static append(item, itemsContainer) {
 
         try {
-            let uiItem=`
+            let uiItem = `
 
-            <div class="col">
-                <div class="partner-logo-container">
+            <a class="col-4 col-md-3 col-lg-2  partner-logo-container" href="${item.link}" target="_blank">
                     <img class="partner-image" src="${item.cover_image}" alt="">
-                </div>
-
-            </div>
+            </a>
             `
 
             itemsContainer.innerHTML += uiItem;

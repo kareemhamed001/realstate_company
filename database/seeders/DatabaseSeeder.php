@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
 //        User::truncate();
 //        \App\Models\User::factory(10)->create();
 //
-//        Feedback::query()->truncate();
-//        Feedback::factory(10)->create();
+        Feedback::query()->truncate();
+        Feedback::factory(10)->create();
 //
 //        Service::truncate();
 //        Service::factory(5)->create();
@@ -41,8 +41,8 @@ class DatabaseSeeder extends Seeder
 //        Setting::truncate();
 //        Setting::factory(1)->create();
 //
-//        Partner::truncate();
-//        Partner::factory(10)->create();
+        Partner::truncate();
+        Partner::factory(10)->create();
 //
 
 
@@ -52,11 +52,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectSeeder::class);
 
         User::query()->truncate();
-//        \App\Models\User::factory()->create([
-//            'name' => 'Admin',
-//            'email' => 'turk@gmail.com',
-//            'password' => bcrypt('123456789'),
-//        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'turk@gmail.com',
+            'password' => bcrypt('123456789'),
+        ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -10,21 +10,23 @@ class DashboardController extends Controller
 {
     use ApiResponse;
 
-    function overview(){
+    function overview()
+    {
         try {
 
 
             return $this->apiResponse([
-                'services' => \App\Models\Service::count(),
-                'packages' => \App\Models\Package::count(),
-                'feedbacks' => \App\Models\Feedback::count(),
-                'galleries' => \App\Models\Project::count(),
-                'partners' => \App\Models\Partner::count(),
-            ]
-                ,'success'
-                ,200);
-        }catch (\Exception $exception){
-            return $this->apiResponse(null,$exception->getMessage(),500);
+                    'services' => \App\Models\Service::count(),
+                    'feedbacks' => \App\Models\Feedback::count(),
+                    'offPlanProject' => \App\Models\Project::query()->where('type', 'compound')->count(),
+                    'exclusiveProperties' => \App\Models\Project::query()->where('type', 'apartment')->count(),
+                    'partners' => \App\Models\Partner::count(),
+                    'coverImages' => \App\Models\CoverImage::query()->count(),
+                ]
+                , 'success'
+                , 200);
+        } catch (\Exception $exception) {
+            return $this->apiResponse(null, $exception->getMessage(), 500);
         }
 
     }

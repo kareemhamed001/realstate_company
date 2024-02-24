@@ -43,7 +43,18 @@ class CoverImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data=$request->validate([
+                'name' => 'nullable|string|max:255',
+                'description' => 'nullable|string|max:255',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'status' => 'required|in:active,inactive'
+            ]);
+            $coverImage = $this->operationService->CoverImage->store($data);
+            return $this->apiResponse($coverImage,'success', 200);
+        } catch (\Exception $exception) {
+            return $this->apiResponse(null,$exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -51,7 +62,12 @@ class CoverImageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $coverImage = $this->operationService->CoverImage->show($id);
+            return $this->apiResponse($coverImage,'success', 200);
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 
     /**
@@ -67,7 +83,18 @@ class CoverImageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $data=$request->validate([
+                'name' => 'nullable|string|max:255',
+                'description' => 'nullable|string|max:255',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+                'status' => 'nullable|in:active,inactive'
+            ]);
+            $coverImage = $this->operationService->CoverImage->update($id, $data);
+            return $this->apiResponse($coverImage,'success', 200);
+        } catch (\Exception $exception) {
+            return $this->apiResponse(null,$exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -75,6 +102,11 @@ class CoverImageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $this->operationService->CoverImage->delete($id);
+            return $this->apiResponse(null,'success', 200);
+        }catch (\Exception $exception){
+            return $this->apiResponse(null,$exception->getMessage(), 500);
+        }
     }
 }

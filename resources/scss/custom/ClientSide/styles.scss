@@ -1,4 +1,5 @@
 @import "../variables.scss";
+@import "quill/dist/quill.snow.css";
 /* Figma Styles of your File */
 :root {
     /* Colors */
@@ -109,6 +110,13 @@ a {
     margin-right: 0.5rem;
 }
 
+.logo {
+    width: 3.5rem;
+    height: 100%;
+    object-fit: contain;
+    aspect-ratio: 1/1;
+
+}
 
 .fixed-header .logo-title {
     font-size: 1.2rem;
@@ -353,6 +361,7 @@ a {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    aspect-ratio: 3/2;
 
 }
 
@@ -398,7 +407,7 @@ a {
 
 }
 
-.main-content{
+.main-content {
     padding: 0 10% !important;
 }
 
@@ -634,6 +643,9 @@ a {
     color: #889099;
     padding: 0.5rem 0;
     text-align: start;
+    word-break: break-all;
+    width: 100% !important;
+
 }
 
 .project-item-price {
@@ -671,8 +683,23 @@ a {
     font-weight: 600;
 }
 
+.exclusiveProperty-item {
+
+    height: 25rem;
+
+}
+
 .exclusiveProperty-item-img-container {
     height: 40%;
+    overflow: hidden;
+}
+
+.exclusiveProperty-item-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.25rem;
 }
 
 .exclusiveProperty-item-description {
@@ -856,13 +883,17 @@ a {
     align-items: center;
     flex-wrap: wrap;
     padding: 0.5rem 0.5rem;
+    object-fit: contain;
+
+
 }
 
 .partner-image {
     width: 100%;
     height: 100%;
-    object-fit: scale-down;
+    object-fit: contain;
     object-position: center;
+    aspect-ratio: 3/2;
 }
 
 #contact-section {
@@ -991,10 +1022,12 @@ a {
     margin-bottom: 0.5rem;
     color: #6D737A;
 }
-.footer-icon-container{
+
+.footer-icon-container {
     padding: 0.2rem;
 }
-.footer-icon{
+
+.footer-icon {
 
     width: 80%;
     color: #3B4D81;
@@ -1006,17 +1039,15 @@ a {
     border-radius: 2px;
 }
 
-.footer-icon:hover{
+.footer-icon:hover {
     color: #edeff6;
     background-color: #3B4D81;
     cursor: pointer;
 }
 
-.footer-icon i{
+.footer-icon i {
     font-size: 1.1rem;
 }
-
-
 
 
 .scroll-up-btn {
@@ -1213,15 +1244,17 @@ a {
 
 .project-img {
     border-radius: 0.25rem;
-    height: 20rem;
     width: 100%;
-    object-fit: cover;
-}
-#image-modal{
-    background-color: rgba(0,0,0,0.5);
+    object-fit: scale-down;
+    object-position: center;
+    aspect-ratio: 3/2;
 }
 
-#image-modal .modal-dialog{
+#image-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#image-modal .modal-dialog {
     width: 100%;
     height: 90vh;
     margin: 1.5rem auto;
@@ -1230,21 +1263,23 @@ a {
 
 }
 
-#image-modal .modal-header{
-    border:none;
+#image-modal .modal-header {
+    border: none;
 
 }
-#image-modal .modal-content{
+
+#image-modal .modal-content {
     height: 100%;
 }
-#image-modal .modal-body{
+
+#image-modal .modal-body {
     border: none;
     overflow: hidden;
     height: 100%;
     width: 100%;
 }
 
-.modal-image{
+.modal-image {
     width: 100%;
     height: 100%;
     object-fit: cover;

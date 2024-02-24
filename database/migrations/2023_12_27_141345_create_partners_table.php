@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('link')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
 
             $table->timestamps();
         });

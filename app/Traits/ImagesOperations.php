@@ -10,6 +10,13 @@ use function Webmozart\Assert\Tests\StaticAnalysis\null;
 trait ImagesOperations
 {
     public $USER_IMAGE_PATH = 'users/images';
+    public $PROJECT_FEATURES_PATH = 'projects/amenities';
+    public $PROJECT_MANAGER_PATH = 'projects/managers';
+    public $PROJECT_IMAGE_PATH = 'projects/images';
+    public $PROJECT_LOCATION_PATH = 'projects/locations';
+    public $PARTNERS_COVER_IMAGES_PATH = 'partners/cover_images';
+    public $WEBSITE_LOGO_PATH = 'website/logo';
+    public $FEEDBACK_USER_IMAGE_PATH = 'feedback/users/images';
 
     public function storeFile($file, $path, $disk = 'public')
     {
@@ -23,16 +30,15 @@ trait ImagesOperations
             } elseif (file_exists(public_path($file))) {
                 return $this->move($file, $path, $disk);
             } elseif (is_string($file)) {
-                if (!file_exists(public_path($file))){
-
+                if (!file_exists(public_path($file))) {
 
 
                     if (preg_match('/^data:image\/(\w+);base64,/', $file, $matches)) {
                         $imageType = $matches[1];
                     } else {
-                       return null;
+                        return null;
                     }
-                    $imageData = base64_decode( str_replace("data:image/{$imageType};base64,", '', $file));
+                    $imageData = base64_decode(str_replace("data:image/{$imageType};base64,", '', $file));
 
 
                     $fileName = Str::uuid() . '.' . $imageType;

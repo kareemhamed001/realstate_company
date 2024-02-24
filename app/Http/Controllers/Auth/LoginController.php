@@ -13,7 +13,11 @@ class LoginController extends Controller
     use ApiResponse;
     public function showLoginPage()
     {
-        return view('auth.login');
+        try {
+            return view('Auth.login');
+        } catch (\Throwable $th) {
+            return abort(500, $th->getMessage());
+        }
     }
     /**
      * Display a listing of the resource.

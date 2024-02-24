@@ -2,9 +2,12 @@
 
 namespace App\Services\Feedback;
 
+use App\Traits\ImagesOperations;
+
 class FeedbackService implements \App\Services\Service
 {
 
+    use ImagesOperations;
 
     /**
      * list all records
@@ -29,7 +32,7 @@ class FeedbackService implements \App\Services\Service
         try {
             return \App\Models\Feedback::query()->find($id);
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            throw $exception;
         }
     }
 
@@ -39,20 +42,23 @@ class FeedbackService implements \App\Services\Service
      * @param array $attributes
      * @return mixed
      */
-    public function update($id, array $attributes): mixed
+    public function update($id, $attributes): mixed
     {
         try {
             $feedback = \App\Models\Feedback::query()->find($id);
+            if (isset($attributes['user_image'])) {
+                $attributes['user_image'] = $this->storeFile($attributes['user_image'], $this->FEEDBACK_USER_IMAGE_PATH);
+            }
             $feedback->update([
-                'name' => $attributes['user_name'] ?? $feedback->user_name,
-                'email' => $attributes['user_image'] ?? $feedback->user_image,
-                'phone' => $attributes['comment'] ?? $feedback->comment,
-                'message' => $attributes['rate'] ?? $feedback->rate,
+                'user_name' => $attributes['user_name'] ?? $feedback->user_name,
+                'user_image' => $attributes['user_image'] ?? $feedback->user_image,
+                'comment' => $attributes['comment'] ?? $feedback->comment,
+                'rate' => $attributes['rate'] ?? $feedback->rate,
                 'status' => $attributes['status'] ?? $feedback->status
             ]);
             return $feedback;
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            throw $exception;
         }
     }
 
@@ -66,7 +72,7 @@ class FeedbackService implements \App\Services\Service
         try {
             return \App\Models\Feedback::query()->find($id)->delete();
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            throw $exception;
         }
     }
 
@@ -84,7 +90,7 @@ class FeedbackService implements \App\Services\Service
                 ->orWhere('rate', 'like', '%' . $search . '%')
                 ->paginate($pagination);
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            throw $exception;
         }
     }
 
@@ -103,7 +109,7 @@ class FeedbackService implements \App\Services\Service
                 ->orWhere('rate', '<=', $attributes['rate_to'] ?? 5)
                 ->paginate($attributes['pagination'] ?? 10);
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            throw $exception;
         }
     }
 
@@ -115,6 +121,9 @@ class FeedbackService implements \App\Services\Service
     public function store($attributes): mixed
     {
         try {
+            if (isset($attributes['user_image'])) {
+                $attributes['user_image'] = $this->storeFile($attributes['user_image'], $this->FEEDBACK_USER_IMAGE_PATH);
+            }
             return \App\Models\Feedback::query()->create([
                 'user_name' => $attributes['user_name'],
                 'user_image' => $attributes['user_image'],
@@ -123,7 +132,7 @@ class FeedbackService implements \App\Services\Service
                 'status' => $attributes['status'] ?? 'active'
             ]);
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            throw $exception;
         }
     }
 }

@@ -86,16 +86,14 @@
                     cubilia curae; Proin sodales ultrices nulla blandit volutpat.</p>
             </div>
 
-            <div class="row justify-content-center" id="exclusiveProperties-container">
+            <div class="row justify-content-center align-items-center overflow-hidden" id="exclusiveProperties-container">
 
             </div>
-            <div class="d-flex justify-content-center align-items-center mt-5">
+            <div class="row d-flex justify-content-center align-items-center">
 
-                <a class="see-all-btn" style="cursor: pointer" id="project-arrow-left" href="{{route('clientSide.exclusiveProperties.index')}}">
+                <a class="see-all-btn w-auto text-decoration-none" style="cursor: pointer" id="project-arrow-left" href="{{route('clientSide.exclusiveProperties.index')}}">
                     See all properties
                 </a>
-
-
             </div>
         </div>
 
@@ -254,7 +252,7 @@
                     cubilia curae; Proin sodales ultrices nulla blandit volutpat.</p>
             </div>
 
-            <div class="d-flex justify-content-center flex-wrap" id="partners-container">
+            <div class="row d-flex justify-content-center align-items-center flex-wrap" id="partners-container">
             </div>
             <div class="d-flex justify-content-center align-items-center mt-4">
 

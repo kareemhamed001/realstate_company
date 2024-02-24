@@ -1,3 +1,6 @@
+.main-content{
+    padding: 0 10% *$factor*0.1 !important;
+}
 
 .fixed-header #upper-header {
     padding: 0.2rem*$factor 0.4rem*$factor;
@@ -28,7 +31,9 @@
 
     margin-right: 0.312rem*$factor;
 }
-
+.logo{
+    width: 1.5rem*$factor;
+}
 .fixed-header .logo-title {
     font-size: 0.6rem*$factor;
 
@@ -240,6 +245,11 @@
 .manager-name {
     font-size: 0.5rem*$factor*0.8;
 }
+.exclusiveProperty-item{
+
+    height: 13rem*$factor*1.2;
+
+}
 
 .exclusiveProperty-item-title {
     font-size: 0.6rem*$factor*0.8;
@@ -325,7 +335,8 @@
 }
 
 .partner-logo-container {
-    padding: 0.5rem*$factor*0.8 0.5rem*$factor*0.8;
+    padding: 0rem*$factor*0.8 0.5rem*$factor*0.8;
+    height: 3.5rem*$factor*0.8;
 }
 
 #contact-section {
@@ -457,10 +468,10 @@
 
 .project-img-container {
 
-    padding: 0.25rem*$factor !important;
+    //padding: 0.25rem*$factor !important;
 }
 .project-img {
-    height: 10rem*$factor*1.1;
+    height: 8rem*$factor*1.1;
 }
 .register-btn {
 

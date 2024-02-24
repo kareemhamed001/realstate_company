@@ -5,29 +5,34 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="HML HOMES">
     <title>@yield('title')</title>
-    @vite(['resources/js/Dashboard/main.js', 'resources/css/app.css','resources/scss/main.scss'])
+    @vite(['resources/js/Dashboard/main.js','resources/scss/main.scss','resources/SCSS/custom/style.scss'])
     @yield('js')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<body class="bg-light position-relative">
+<body class="bg-light position-relative d-none">
 
-<div class="w-100 h-100 bg-white position-fixed" id="loader">
-    <div class="spinner-grow" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
+{{--<div class="w-100 h-100 bg-white position-fixed" id="loader">--}}
+{{--    <div class="spinner-grow" role="status">--}}
+{{--        <span class="visually-hidden">Loading...</span>--}}
+{{--    </div>--}}
+{{--</div>--}}
+<div class="" id="loader" style="display: flex;justify-content: center;align-items: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 10000;background-color: rgba(0,0,0,0.95)">
+    <span class="loader"></span>
 </div>
-
 <div class="d-flex " style="height: 100vh;max-height: 100vh;width: 100vw">
 
-    <div class=" col-xxl-2 col-xl-2 col-lg-3 col-md-4 col-sm-5 col-5 d-none rounder-3" id="sidebar">
+    <aside class=" col-xxl-2 col-xl-2 col-lg-3 col-md-4 col-sm-5 col-5 d-none rounder-3" id="sidebar">
         <div class="h-100 overflow-auto bg-white shadow-sm rounded-bottom ">
             <nav
                 class="navbar navbar-expand-lg navbar-light bg-transparent pt-5 pb-4">
                 <div class="container justify-content-center">
-                    <a class="navbar-brand" href="#"><span class="heading-bold"> HML</span> <span
+                    <a class="navbar-brand" href='{{route('dashboard.web.index')}}'><span class="heading-bold"> HML</span> <span
                             class="heading-regular">Home</span> </a>
                 </div>
             </nav>
@@ -36,8 +41,8 @@
 
             <div class="h100 ">
                 <div class=" sidebar-pages-container">
-                    <a href="{{route('dashboard.web.services.index')}}"
-                       class="sidebar-item"
+                    <a href="{{route('dashboard.web.covers.index')}}"
+                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.covers.index')])) active @endif"
                        aria-current="true">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -50,9 +55,9 @@
                         </svg>
 
 
-                        Cover Page</a>
-                    <a href="{{route('dashboard.web.services.index')}}"
-                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.services.index')])) active @endif"
+                        Cover Page & Services</a>
+                    <a href="{{route('dashboard.web.off-plans.index')}}"
+                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.off-plans.index')])) active @endif"
                        aria-current="true">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor " stroke-width="2"
@@ -66,10 +71,10 @@
                             <path d="M21.0001 17.5001L13.9999 17.5001" stroke="currentColor " stroke-width="2"
                                   stroke-linecap="round"/>
                         </svg>
-                        Services</a>
+                        Off plan projects</a>
 
-                    <a href="{{route('dashboard.web.packages.index')}}"
-                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.packages.index')])) active @endif">
+                    <a href="{{route('dashboard.web.exclusive-properties.index')}}"
+                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.exclusive-properties.index')])) active @endif">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M12 13V20.0979C12 20.4968 12 20.6962 11.8712 20.7676C11.7424 20.839 11.5733 20.7333 11.235 20.5219L4.94 16.5875C4.48048 16.3003 4.25072 16.1567 4.12536 15.9305C4 15.7043 4 15.4334 4 14.8915V8M12 13L4 8M12 13L17.2864 9.696C18.5043 8.93483 19.1132 8.55425 19.1132 8C19.1132 7.44575 18.5043 7.06517 17.2864 6.304L13.06 3.6625C12.5445 3.34033 12.2868 3.17925 12 3.17925C11.7132 3.17925 11.4555 3.34033 10.94 3.6625L4 8"
@@ -84,9 +89,9 @@
                                 fill="currentColor "/>
                         </svg>
 
-                        packages</a>
-                    <a href="{{route('dashboard.web.gallery.index')}}"
-                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.gallery.index')])) active @endif">
+                        Exclusive properties</a>
+                    <a href="{{route('dashboard.web.feedbacks.index')}}"
+                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.feedbacks.index')])) active @endif">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M4.32698 6.63803L5.21799 7.09202H5.21799L4.32698 6.63803ZM4.7682 20.2318L4.06109 19.5247H4.06109L4.7682 20.2318ZM18.362 16.673L18.816 17.564L18.816 17.564L18.362 16.673ZM19.673 15.362L18.782 14.908L19.673 15.362ZM19.673 6.63803L20.564 6.18404V6.18404L19.673 6.63803ZM18.362 5.32698L18.816 4.43597L18.816 4.43597L18.362 5.32698ZM5.63803 5.32698L6.09202 6.21799L5.63803 5.32698ZM7.70711 17.2929L7 16.5858L7.70711 17.2929ZM5 9.8C5 8.94342 5.00078 8.36113 5.03755 7.91104C5.07337 7.47262 5.1383 7.24842 5.21799 7.09202L3.43597 6.18404C3.18868 6.66937 3.09012 7.18608 3.04419 7.74817C2.99922 8.2986 3 8.97642 3 9.8H5ZM5 12V9.8H3V12H5ZM3 12V17H5V12H3ZM3 17V19.9136H5V17H3ZM3 19.9136C3 21.2054 4.56185 21.8524 5.4753 20.9389L4.06109 19.5247C4.40757 19.1782 5 19.4236 5 19.9136H3ZM5.4753 20.9389L8.41421 18L7 16.5858L4.06109 19.5247L5.4753 20.9389ZM15.2 16H8.41421V18H15.2V16ZM17.908 15.782C17.7516 15.8617 17.5274 15.9266 17.089 15.9624C16.6389 15.9992 16.0566 16 15.2 16V18C16.0236 18 16.7014 18.0008 17.2518 17.9558C17.8139 17.9099 18.3306 17.8113 18.816 17.564L17.908 15.782ZM18.782 14.908C18.5903 15.2843 18.2843 15.5903 17.908 15.782L18.816 17.564C19.5686 17.1805 20.1805 16.5686 20.564 15.816L18.782 14.908ZM19 12.2C19 13.0566 18.9992 13.6389 18.9624 14.089C18.9266 14.5274 18.8617 14.7516 18.782 14.908L20.564 15.816C20.8113 15.3306 20.9099 14.8139 20.9558 14.2518C21.0008 13.7014 21 13.0236 21 12.2H19ZM19 9.8V12.2H21V9.8H19ZM18.782 7.09202C18.8617 7.24842 18.9266 7.47262 18.9624 7.91104C18.9992 8.36113 19 8.94342 19 9.8H21C21 8.97642 21.0008 8.2986 20.9558 7.74817C20.9099 7.18608 20.8113 6.66937 20.564 6.18404L18.782 7.09202ZM17.908 6.21799C18.2843 6.40973 18.5903 6.7157 18.782 7.09202L20.564 6.18404C20.1805 5.43139 19.5686 4.81947 18.816 4.43597L17.908 6.21799ZM15.2 6C16.0566 6 16.6389 6.00078 17.089 6.03755C17.5274 6.07337 17.7516 6.1383 17.908 6.21799L18.816 4.43597C18.3306 4.18868 17.8139 4.09012 17.2518 4.04419C16.7014 3.99922 16.0236 4 15.2 4V6ZM8.8 6H15.2V4H8.8V6ZM6.09202 6.21799C6.24842 6.1383 6.47262 6.07337 6.91104 6.03755C7.36113 6.00078 7.94342 6 8.8 6V4C7.97642 4 7.2986 3.99922 6.74817 4.04419C6.18608 4.09012 5.66937 4.18868 5.18404 4.43597L6.09202 6.21799ZM5.21799 7.09202C5.40973 6.71569 5.71569 6.40973 6.09202 6.21799L5.18404 4.43597C4.43139 4.81947 3.81947 5.43139 3.43597 6.18404L5.21799 7.09202ZM8.41421 18V16C7.88378 16 7.37507 16.2107 7 16.5858L8.41421 18Z"
@@ -97,10 +102,10 @@
                                   stroke-linejoin="round"/>
                         </svg>
 
-                        Feedback</a>
+                        Feedbacks</a>
 
-                    <a href="{{route('dashboard.web.gallery.index')}}"
-                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.gallery.index')])) active @endif">
+                    <a href="{{route('dashboard.web.about-us.index')}}"
+                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.about-us.index')])) active @endif">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="12" r="9" stroke="currentColor " stroke-width="2"/>
                             <circle cx="12" cy="18" r="0.5" fill="currentColor " stroke="currentColor "/>
@@ -112,8 +117,8 @@
 
                         About us</a>
 
-                    <a href="{{route('dashboard.web.gallery.index')}}"
-                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.gallery.index')])) active @endif">
+                    <a href="{{route('dashboard.web.partners.index')}}"
+                       class="sidebar-item @if(in_array(request()->url(),[route('dashboard.web.partners.index')])) active @endif">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="8" r="3" stroke="currentColor " stroke-width="2"
                                     stroke-linecap="round"/>
@@ -134,18 +139,18 @@
                                 stroke="currentColor " stroke-width="2" stroke-linecap="round"/>
                         </svg>
 
-                        partner</a>
+                        partners</a>
 
                 </div>
             </div>
         </div>
 
 
-    </div>
+    </aside>
 
 
     <div class="col h-100 mh-100  ">
-        <nav class="justify-content-between" id="header">
+        <header class="justify-content-between" id="header">
 
 
             <div id="toggleSidebarBtn" class=" header-item">
@@ -167,7 +172,7 @@
                 </div>
             </div>
 
-        </nav>
+        </header>
 
         <div class=" overflow-auto container-fluid mt-5 mw-100" style="max-height: 90%" id="content">
 
@@ -176,7 +181,7 @@
                 <h3 class="heading p-0 mt-0 mb-2">Overview</h3>
             </div>
             <div class="row px-2">
-                <div class="col-md-3 px-2 mb-2">
+                <div class="col-xl col-md-3 col-12 px-2 mb-2">
                     <div class="information-card">
                         <div class="card-icon">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -202,7 +207,7 @@
 
                     </div>
                 </div>
-                <div class="col-md-3 px-2 mb-2">
+                <div class="col-xl col-md-3 col-12 px-2 mb-2">
                     <div class="information-card">
                         <div class="card-icon">
                             <svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -226,7 +231,7 @@
 
                     </div>
                 </div>
-                <div class="col-md-3 px-2 mb-2">
+                <div class="col-xl col-md-3 col-12 px-2 mb-2">
                     <div class="information-card">
                         <div class="card-icon">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -241,16 +246,40 @@
 
                         <div class="card-typography">
                             <div class="custom-card-title">
-                                Packages
+                                Off Plan Projects
                             </div>
-                            <div class="custom-card-number" id="packagesCount">
+                            <div class="custom-card-number" id="offPlanProjectsCount">
                                 0
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <div class="col-md-3 px-2 mb-2">
+                <div class="col-xl col-md-3 col-12 px-2 mb-2">
+                    <div class="information-card">
+                        <div class="card-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.0002 17.3333V27.0979C16.0002 27.4968 16.0002 27.6962 15.8714 27.7676C15.7425 27.839 15.5734 27.7333 15.2352 27.5219L6.2735 21.9208C5.81397 21.6336 5.58421 21.49 5.45885 21.2639C5.3335 21.0377 5.3335 20.7667 5.3335 20.2248V10.6667M16.0002 17.3333L5.3335 10.6667M16.0002 17.3333L23.9532 12.3627C25.1711 11.6015 25.78 11.2209 25.78 10.6667C25.78 10.1124 25.1711 9.73184 23.9532 8.97067L17.0602 4.6625C16.5447 4.34033 16.287 4.17925 16.0002 4.17925C15.7134 4.17925 15.4556 4.34033 14.9402 4.6625L5.3335 10.6667" stroke="#3851DD" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M25.6668 16C25.6668 16.5523 26.1145 17 26.6668 17C27.2191 17 27.6668 16.5523 27.6668 16H25.6668ZM25.7268 10.0791L25.1968 10.9271L25.7268 10.0791ZM26.5415 10.7361L25.6668 11.2209L26.5415 10.7361ZM25.6668 11.7751V16H27.6668V11.7751H25.6668ZM26.2568 9.23115L21.8635 6.48531L20.8035 8.18131L25.1968 10.9271L26.2568 9.23115ZM27.6668 11.7751C27.6668 11.523 27.6679 11.2643 27.6466 11.042C27.6233 10.7985 27.5685 10.5262 27.4161 10.2514L25.6668 11.2209C25.6398 11.1722 25.6477 11.1485 25.6557 11.2325C25.6658 11.3377 25.6668 11.4854 25.6668 11.7751H27.6668ZM25.1968 10.9271C25.4425 11.0807 25.5672 11.1599 25.6511 11.2242C25.7181 11.2755 25.6938 11.2696 25.6668 11.2209L27.4161 10.2514C27.2638 9.97649 27.062 9.78567 26.8678 9.63687C26.6906 9.50102 26.4706 9.36478 26.2568 9.23115L25.1968 10.9271Z" fill="#3851DD"/>
+                                <circle cx="23.3333" cy="22" r="3.33333" stroke="#3851DD" stroke-width="2"/>
+                                <path d="M28 26.6667L26 24.6667" stroke="#3851DD" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M19.1965 27.1814C19.6648 26.8886 19.8072 26.2717 19.5145 25.8034C19.2218 25.335 18.6048 25.1926 18.1365 25.4854L19.1965 27.1814ZM14.9398 27.3375L14.4098 28.1855L14.9398 27.3375ZM15.9998 27.8208V28.8208V27.8208ZM15.4698 26.4895L11.1965 23.8187L10.1365 25.5147L14.4098 28.1855L15.4698 26.4895ZM16.8032 26.3187L16.5298 26.4895L17.5898 28.1855L17.8632 28.0147L16.8032 26.3187ZM18.1365 25.4854L17.4698 25.902L18.5298 27.598L19.1965 27.1814L18.1365 25.4854ZM17.4698 25.902L16.8032 26.3187L17.8632 28.0147L18.5298 27.598L17.4698 25.902ZM14.4098 28.1855C14.65 28.3356 14.8941 28.4896 15.1163 28.5983C15.3596 28.7172 15.6504 28.8208 15.9998 28.8208V26.8208C16.0624 26.8208 16.0811 26.8438 15.9949 26.8016C15.8877 26.7492 15.7451 26.6616 15.4698 26.4895L14.4098 28.1855ZM16.5298 26.4895C16.2545 26.6616 16.112 26.7492 16.0048 26.8016C15.9186 26.8438 15.9372 26.8208 15.9998 26.8208V28.8208C16.3492 28.8208 16.6401 28.7172 16.8834 28.5983C17.1056 28.4896 17.3497 28.3356 17.5898 28.1855L16.5298 26.4895Z" fill="#3851DD"/>
+                            </svg>
+
+                        </div>
+
+                        <div class="card-typography">
+                            <div class="custom-card-title">
+                                Exclusive Properties
+                            </div>
+                            <div class="custom-card-number" id="exclusivePropertiesCount">
+                                0
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl col-md-3 col-12 px-2 mb-2">
                     <div class="information-card">
                         <div class="card-icon">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none"

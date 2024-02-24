@@ -49,55 +49,6 @@ const routes = {
                 method: 'delete'
             }
         },
-        gallery: {
-            list: {
-                url: '/dashboard/api/projects',
-                method: 'get'
-            },
-
-            store: {
-                url: '/dashboard/api/projects',
-                method: 'post'
-            },
-            show: {
-                url: '/dashboard/api/projects/{projects}',
-                method: 'get'
-
-            },
-
-            update: {
-                url: '/dashboard/api/projects/{projects}',
-                method: 'put'
-            },
-            destroy: {
-                url: '/dashboard/api/projects/{projects}',
-                method: 'delete'
-            },
-        },
-        package: {
-            list: {
-                url: '/dashboard/api/packages',
-                method: 'get'
-            },
-
-            store: {
-                url: '/dashboard/api/packages',
-                method: 'post'
-            },
-            show: {
-                url: '/dashboard/api/packages/{package}',
-                method: 'get'
-
-            },
-            update: {
-                url: '/dashboard/api/packages/{package}',
-                method: 'post'
-            },
-            destroy: {
-                url: '/dashboard/api/packages/{package}',
-                method: 'delete'
-            }
-        },
         setting: {
             list: {
                 url: '/dashboard/api/settings',
@@ -135,7 +86,7 @@ const routes = {
             },
             update: {
                 url: '/dashboard/api/partners/{partners}',
-                method: 'put'
+                method: 'post'
             },
             destroy: {
                 url: '/dashboard/api/partners/{partners}',
@@ -157,7 +108,7 @@ const routes = {
             },
             update: {
                 url: '/dashboard/api/feedbacks/{feedbacks}',
-                method: 'put'
+                method: 'post'
             },
             destroy: {
                 url: '/dashboard/api/feedbacks/{feedbacks}',
@@ -180,13 +131,47 @@ const routes = {
             update: {
 
                 url: '/dashboard/api/cover-images/{coverImage}',
-                method: 'put'
+                method: 'post'
             },
             destroy: {
                 url: '/dashboard/api/cover-images/{coverImage}',
                 method: 'delete'
 
             }
+        },
+        project: {
+            list: {
+                url: '/dashboard/api/projects',
+                method: 'get'
+            },
+            store: {
+                url: '/dashboard/api/projects',
+                method: 'post'
+            },
+            show: {
+                url: '/dashboard/api/projects/{project}',
+                method: 'get'
+            },
+            update: {
+                url: '/dashboard/api/projects/{project}',
+                method: 'post'
+            },
+            destroy: {
+                url: '/dashboard/api/projects/{project}',
+                method: 'delete'
+            }
+        },
+        web:{
+            project: {
+                create: {
+                    url: '/dashboard/projects/create',
+                    method: 'get'
+                },
+                edit: {
+                    url: '/dashboard/projects/{projects}/edit',
+                    method: 'get'
+                },
+            },
         }
     },
     client: {

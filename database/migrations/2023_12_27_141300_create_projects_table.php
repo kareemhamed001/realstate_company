@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->enum('type',['compound','apartment'])->default('compound');
+            $table->string('summary',255)->nullable();
+            $table->enum('type',['compound','apartment'])->default('compound')->comment('compound=off plan project, apartment=exclusive properties');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('cover_image')->nullable();
             $table->unsignedInteger('price')->nullable();

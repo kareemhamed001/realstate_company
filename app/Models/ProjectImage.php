@@ -15,6 +15,9 @@ class ProjectImage extends Model
     }
 
     function getImageAttribute(){
+        if (empty($this->attributes['image'])) {
+            return null;
+        }
         return url($this->attributes['image']);
     }
 }

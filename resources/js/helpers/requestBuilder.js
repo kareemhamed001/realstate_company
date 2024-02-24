@@ -6,7 +6,6 @@ window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-
 class Request {
     constructor(url, method, data, headers, responseType, previewType = 'swal', showLoader = true) {
         this.url = url;
@@ -19,6 +18,13 @@ class Request {
     }
 
     send() {
+        if (localStorage.getItem('token') != null) {
+            this.headers = {
+                ...this.headers,
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        }
+
 
         const axiosConfig = {
             method: this.method,

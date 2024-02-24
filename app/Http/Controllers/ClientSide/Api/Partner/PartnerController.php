@@ -23,7 +23,7 @@ class PartnerController extends Controller
     public function index(Request $request)
     {
         try {
-            $services = $this->operationService->Partner->index($request->pagination??10);
+            $services = $this->operationService->Partner->index($request->pagination??10,'active');
             return $this->apiResponse($services,'success', 200);
         } catch (\Exception $exception) {
             return $this->apiResponse(null, $exception->getMessage(), 500);

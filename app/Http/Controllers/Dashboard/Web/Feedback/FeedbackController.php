@@ -23,8 +23,7 @@ class FeedbackController extends Controller
     public function index(Request $request)
     {
         try {
-            $services = $this->operationService->Feedback->index($request->pagination??10);
-            return $this->apiResponse($services,'success', 200);
+            return view('dashboard.feedback.index');
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }

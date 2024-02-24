@@ -32,7 +32,7 @@ class Service {
         return await request.send();
     }
 
-    async store() {
+    async store(data) {
         let request = new RequestBuilder()
             .setUrl(routes.dashboard.service.store.url)
             .setMethod(routes.dashboard.service.store.method)

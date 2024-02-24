@@ -71,13 +71,16 @@ class ExclusivePropertyController {
 
         try {
 
-            let uiItem=`
+            let uiItem=document.createElement('div');
+            uiItem.classList.add('col-6', 'col-md-4', 'p-2', 'my-2','exclusiveProperty-item');
+            uiItem.innerHTML = `
 
-            <div class="col-6 col-md-4 p-2">
+
+
                 <div class="card border-0 p-0 shadow-sm h-100">
                     <div class="card-body p-0">
-                        <div class="exclusiveProperty-item-img-container h-40">
-                            <img class="w-100 h-100 rounded-top" style="object-fit: fill" src="${item.cover_image}" alt="">
+                        <div class="exclusiveProperty-item-img-container">
+                            <img   src="${item.cover_image}" alt="">
                         </div>
 
                         <div class="p-3 h-60">
@@ -85,11 +88,11 @@ class ExclusivePropertyController {
                                ${item.name}
                             </h4>
                             <p class="exclusiveProperty-item-description">
-                                ${item.description.substring(0, 100)}
+                                ${item.summary??''}
                             </p>
 
                             <div class="my-2 exclusiveProperty-item-price ">
-                                $ ${item.price}
+                                $ ${item.price??''}
                             </div>
 
                             <div class="hl">
@@ -102,10 +105,10 @@ class ExclusivePropertyController {
 
                     </div>
                 </div>
-            </div>
+
             `
 
-            itemsContainer.innerHTML += uiItem;
+            itemsContainer.appendChild(uiItem)
 
 
         } catch (e) {

@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<div class="" id="loader">
+<div class="" id="loader" style="display: flex;justify-content: center;align-items: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 10000;background-color: rgba(0,0,0,0.95)">
     <span class="loader"></span>
 </div>
 
@@ -26,9 +26,9 @@
     <nav id="upper-header">
 
         <div class="d-large-none">
-            <a href="" class="link d-flex align-items-center " id="logo">
-                <i class="fa-sharp fa-light fa-house" id="logo-icon"></i>
+            <a href="" class="link d-flex align-items-center logo-container " id="logo">
 
+                <img src="" class="logo" id="logo-icon" alt="">
                 <div class="d-flex flex-column justify-content-start align-items-start">
                     <div class="logo-title">HML Home</div>
                     <div class="logo-description">Real State Broker L.L.C</div>
@@ -73,8 +73,9 @@
     <nav class=" d-flex" id="lower-header">
 
         <div class="d-phone-none">
-            <a href="{{route('home')}}" class="link d-flex align-items-center " id="logo">
-                <i class="fa-sharp fa-light fa-house" id="logo-icon"></i>
+            <a href="{{route('home')}}" class="link d-flex align-items-center logo-container " id="logo">
+{{--                <i class="fa-sharp fa-light fa-house" id="logo-icon"></i>--}}
+                <img src="" class="logo" id="logo-icon" alt="">
 
                 <div class="d-flex flex-column justify-content-start align-items-start">
                     <div class=" logo-title">HML Home</div>
@@ -117,8 +118,8 @@
 </div>
 <div class="footer container">
     <div class="col-3 footer-col">
-        <a href="" class="link d-flex align-items-center logo">
-            <i class="fa-sharp fa-light fa-house logo-icon" id="logo-icon"></i>
+        <a href="" class="link d-flex align-items-center logo-container">
+            <img src="" class="logo" id="logo-icon" alt="">
             <div class="d-flex flex-column justify-content-start align-items-start">
                 <div class="logo-title">HML Home</div>
                 <div class="logo-description">Real State Broker L.L.C</div>

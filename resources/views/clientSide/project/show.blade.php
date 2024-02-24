@@ -103,8 +103,8 @@
                     <div class="project-tab-header">
                         About The Project
                     </div>
-                    <div class="project-item-description">
-                        {{$project->description}}
+                    <div class="ql-editor">
+                        {!! $project->description !!}
                     </div>
                     <div class="project-tab-header">
                         AMENITIES
@@ -313,8 +313,8 @@
                             <div style="width: 100%">
                                 <span class="project-manager-name">{{$project->manager}}<br/> </span>
 
-                                <span class="project-manager-description">
-                                    {{$project->manager_description}}
+                                <span class="ql-editor">
+                                    {!!$project->manager_description!!}
                                 </span>
                             </div>
                         </div>

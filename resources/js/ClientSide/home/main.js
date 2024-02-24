@@ -6,7 +6,7 @@ import FeedbackController from "../Services/Feedback/controller.js";
 import PartnerController from "../Services/Partner/controller.js";
 import ExceptionHandler from "../../helpers/ExceptionHandler.js";
 
-import CoverImage from "../../Api/CoverImage/api.js";
+import CoverImage from "../Api/CoverImage/api.js";
 import Project from "../Api/Project/api.js";
 import Feedback from "../Api/Feedback/api.js";
 import Partner from "../Api/Partner/api.js";
@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
 let serviceController = new ServiceController();
 let exclusivePropertyController = new ExclusivePropertyController();
 
-let coverImage = new CoverImage();
+let coverImage = new CoverImage('swal', 'json');
 let project = new Project();
 let feedback = new Feedback();
 let partner = new Partner();
@@ -26,8 +26,8 @@ let partner = new Partner();
 async function init() {
     try {
 
-        let coverImagesResponse = await coverImage.list(1, 8, true);
-        if (coverImagesResponse.response && coverImagesResponse.response.data && coverImagesResponse.response.data.data && coverImagesResponse.response.data.data.data) {
+        let coverImagesResponse = await coverImage.list( true);
+        if (coverImagesResponse.response && coverImagesResponse.response.data && coverImagesResponse.response.data.data) {
             CoverImageController.showPreview(coverImagesResponse.response.data.data.data, 'coverImagesContainer');
         }
 

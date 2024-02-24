@@ -2,6 +2,8 @@
 
 namespace App\Services\CoverImage;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class CoverImageService implements \App\Services\Service
 {
 
@@ -11,11 +13,13 @@ class CoverImageService implements \App\Services\Service
      * list all records
      * @return mixed
      */
-    public function index($pagination = 10): mixed
+    public function index($pagination = 10, $status = null): mixed
     {
 
         try {
-            return \App\Models\CoverImage::query()->where('status', 'active')->inRandomOrder()->paginate($pagination);
+            return \App\Models\CoverImage::query()->when($status, function (Builder $query)use($status){
+                $query->where('status', $status);
+            })->paginate($pagination);
         } catch (\Exception $exception) {
             throw $exception;
         }
@@ -45,10 +49,16 @@ class CoverImageService implements \App\Services\Service
     {
         try {
             $coverImage = \App\Models\CoverImage::query()->find($id);
+
+            if (isset($attributes['image'])) {
+                $attributes['image'] = $this->storeFile($attributes['image'], 'cover_images');
+            } else {
+                $attributes['image'] = $coverImage->image;
+            }
             $coverImage->update([
                 'name' => $attributes['name'] ?? $coverImage->name,
                 'description' => $attributes['description'] ?? $coverImage->description,
-                'image' => $this->storeFile($attributes['image'] ?? $coverImage->image, 'cover_images'),
+                'image' => $attributes['image'] ?? $coverImage->image,
                 'status' => $attributes['status'] ?? $coverImage->status
             ]);
 
@@ -117,10 +127,14 @@ class CoverImageService implements \App\Services\Service
     {
 
         try {
+
+            if (isset($attributes['image'])) {
+                $attributes['image'] = $this->storeFile($attributes['image'], 'cover_images');
+            }
             $coverImage = \App\Models\CoverImage::query()->create([
                 'name' => $attributes['name'] ?? '',
                 'description' => $attributes['description'] ?? '',
-                'image' => $this->storeFile($attributes['image'], 'cover_images'),
+                'image' => $attributes['image'] ,
                 'status' => $attributes['status']
             ]);
 

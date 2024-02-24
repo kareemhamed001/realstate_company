@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/cover-images', [\App\Http\Controllers\ClientSide\Api\CoverImage\CoverImageController::class, 'index']);
 Route::get('/services', [\App\Http\Controllers\ClientSide\Api\Service\ServiceController::class, 'index']);
 Route::get('/settings', [\App\Http\Controllers\ClientSide\Api\Settings\SettingsController::class, 'index']);
 Route::get('/feedbacks', [\App\Http\Controllers\ClientSide\Api\Feedback\FeedbackController::class, 'index']);

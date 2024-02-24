@@ -23,8 +23,7 @@ class PartnerController extends Controller
     public function index(Request $request)
     {
         try {
-            $services = $this->operationService->Partner->index($request->pagination??10);
-            return $this->apiResponse($services,'success', 200);
+            return view('dashboard.partner.index');
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }

@@ -101,19 +101,23 @@ async function showOverView() {
         if (response.status === 200) {
             let coverImagesCount = document.getElementById('coverImagesCount');
             let servicesCount = document.getElementById('servicesCount');
-            let packagesCount = document.getElementById('packagesCount');
             let feedbacksCount = document.getElementById('feedbacksCount');
+            let offPlanProjectsCount = document.getElementById('offPlanProjectsCount');
+            let exclusivePropertiesCount = document.getElementById('exclusivePropertiesCount');
 
             if (coverImagesCount) {
-                coverImagesCount.innerHTML = response.data.data.galleries??0;
+                coverImagesCount.innerHTML = response.data.data.coverImages??0;
             }
 
             if (servicesCount) {
                 servicesCount.innerHTML = response.data.data.services??0;
             }
 
-            if (packagesCount) {
-                packagesCount.innerHTML = response.data.data.packages??0;
+            if (offPlanProjectsCount) {
+                offPlanProjectsCount.innerHTML = response.data.data.offPlanProject??0;
+            }
+            if (exclusivePropertiesCount) {
+                exclusivePropertiesCount.innerHTML = response.data.data.exclusiveProperties??0;
             }
             if (feedbacksCount) {
                 feedbacksCount.innerHTML = response.data.data.feedbacks??0;

@@ -84,7 +84,12 @@ class ServiceController extends Controller
     {
         try {
 
-            $data = $request->all();
+            $data = $request->validate([
+                'title' => 'nullable|string|max:255',
+                'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'status' => 'nullable|in:active,inactive',
+            ]);
+
             $service = $this->operationService->Service->update($id, $data);
             return $this->apiResponse($service, 'success', 200);
         } catch (\Exception $exception) {

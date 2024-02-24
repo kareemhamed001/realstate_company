@@ -1,6 +1,6 @@
 
-import routes from "../../routes.js";
-import RequestBuilder from "../../helpers/requestBuilder.js";
+import routes from "@/routes.js";
+import RequestBuilder from "@/helpers/requestBuilder.js";
 
 class CoverImage {
     constructor(previewType = "swal", responseType = "json", headers = null) {
@@ -9,14 +9,15 @@ class CoverImage {
         this._responseType = responseType;
     }
 
-    async list(page=1, perPage = 8) {
+    async list(showLoader=true) {
         try {
             let request = new RequestBuilder()
-                .setUrl(routes.dashboard.coverImage.list.url + "?page=" + page + "&pagination=" + perPage)
-                .setMethod(routes.dashboard.coverImage.list.method)
+                .setUrl(routes.client.coverImage.list.url)
+                .setMethod(routes.client.coverImage.list.method)
                 .setHeaders({'Accept': 'application/json', ...this._headers})
                 .setResponseType(this._responseType)
                 .setPreviewType(this._previewType)
+                .setShowLoader(showLoader)
                 .build()
             return await request.send();
         }catch (e) {

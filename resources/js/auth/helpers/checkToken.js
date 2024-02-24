@@ -22,6 +22,8 @@ async function checkToken() {
             if (response) {
                 if (response.response.status === 200) {
 
+                    let body=document.querySelector('body');
+                    body.classList.remove('d-none');
                     return true;
                 } else {
                     if (window.location.pathname !== "/login") {

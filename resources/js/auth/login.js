@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import RequestBuilder from "../helpers/requestBuilder.js";
 import routes from "../routes.js";

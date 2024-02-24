@@ -12,7 +12,7 @@ class ServiceController extends Controller
     public function index(Request $request)
     {
         try {
-            return view('dashboard.services.index');
+            return view('dashboard.covers.index');
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }

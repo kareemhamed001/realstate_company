@@ -61,8 +61,7 @@ class ServiceService implements \App\Services\Service
                 $attributes['cover_image'] = $service->cover_image;
             }
             $service->update([
-                'name' => $attributes['name'] ?? $service->name,
-                'description' => $attributes['description'] ?? $service->description,
+                'title' => $attributes['title'] ?? $service->title,
                 'cover_image' => $attributes['cover_image'] ?? $service->cover_image,
                 'status' => $attributes['status'] ?? $service->status
             ]);

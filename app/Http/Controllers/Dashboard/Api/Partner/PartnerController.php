@@ -44,7 +44,19 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data=$request->validate([
+                'name' =>[ 'required','string','max:100'],
+                'description' => ['nullable','string','max:255'],
+                'cover_image' => ['required','image','mimes:png,svg,ico'],
+                'link' => ['nullable','url'],
+                'status' => ['required', 'in:active,inactive']
+            ]);
+            $partner = $this->operationService->Partner->store($data);
+            return $this->apiResponse($partner,'success', 200);
+        } catch (\Exception $exception) {
+            return $this->apiResponse(null,$exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -52,7 +64,12 @@ class PartnerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $partner = $this->operationService->Partner->show($id);
+            return $this->apiResponse($partner,'success', 200);
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 
     /**
@@ -68,7 +85,19 @@ class PartnerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $data=$request->validate([
+                'name' =>[ 'nullable','string','max:100'],
+                'description' => ['nullable','string','max:255'],
+                'cover_image' => ['nullable','image','mimes:png,svg,ico'],
+                'link' => ['nullable','url'],
+                'status' => ['nullable', 'in:active,inactive']
+            ]);
+            $partner = $this->operationService->Partner->update($id, $data);
+            return $this->apiResponse($partner,'success', 200);
+        } catch (\Exception $exception) {
+            return $this->apiResponse(null,$exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -76,6 +105,15 @@ class PartnerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $partner = \App\Models\Partner::query()->find($id);
+            if (!$partner) {
+                throw new \Exception('Partner not found');
+            }
+            $partner->delete();
+            return $partner;
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
     }
 }

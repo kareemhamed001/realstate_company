@@ -2,12 +2,14 @@
 
 namespace App\Services\Setting;
 
+use App\Models\Setting;
 use App\Traits\ImagesOperations;
 
 class SettingService implements \App\Services\Service
 {
 
     use ImagesOperations;
+
     /**
      * list all records
      * @return mixed
@@ -15,7 +17,7 @@ class SettingService implements \App\Services\Service
     public function index($pagination = 10): mixed
     {
         try {
-            return \App\Models\Setting::query()->paginate($pagination);
+            return \App\Models\Setting::query()->first();
         } catch (\Exception $exception) {
             throw $exception;
         }
@@ -105,15 +107,18 @@ class SettingService implements \App\Services\Service
     public function store($attributes): mixed
     {
         try {
-            return \App\Models\Setting::query()->create([
-                'website_name' => $attributes['name']??config('websiteSettings.website_name'),
-                'website_description' => $attributes['description']??config('websiteSettings.website_description'),
-                'email' => $attributes['email']??config('websiteSettings.email'),
-                'phone' => $attributes['phone']??config('websiteSettings.phone'),
-                'about_us' => $attributes['about_us']??config('websiteSettings.about_us'),
-            ]);
+            if (isset($attributes['website_logo'])) {
+                $attributes['website_logo'] = $this->storeFile($attributes['website_logo'], $this->WEBSITE_LOGO_PATH);
+            }
+            $settings = \App\Models\Setting::query()->first();
+            if(!$settings) {
+                $settings = Setting::query()->create($attributes);
+            }else {
+                $settings->update($attributes);
+            }
+            return $settings;
         } catch (\Exception $exception) {
-            return $exception->getMessage();
+            throw $exception;
         }
     }
 }

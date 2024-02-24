@@ -44,7 +44,19 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data=$request->validate([
+                'user_name'=>['required','string'],
+                'user_image'=>['required','image'],
+                'comment'=>['required','string'],
+                'rate'=>['required','numeric'],
+                'status'=>['required','in:active,inactive'],
+            ]);
+            $service = $this->operationService->Feedback->store($data);
+            return $this->apiResponse($service,'success', 200);
+        } catch (\Exception $exception) {
+            return $this->apiResponse(null,$exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -52,7 +64,12 @@ class FeedbackController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $service = $this->operationService->Feedback->show($id);
+            return $this->apiResponse($service,'success', 200);
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 
     /**
@@ -68,7 +85,20 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $data=$request->validate([
+                'user_name'=>['nullable','string'],
+                'user_image'=>['nullable','image'],
+                'comment'=>['nullable','string'],
+                'rate'=>['nullable','numeric'],
+                'status'=>['nullable','in:active,inactive'],
+            ]);
+
+            $service = $this->operationService->Feedback->update($id,$data);
+            return $this->apiResponse($service,'success', 200);
+        } catch (\Exception $exception) {
+            return $this->apiResponse(null,$exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -76,6 +106,11 @@ class FeedbackController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $service = $this->operationService->Feedback->delete($id);
+            return $this->apiResponse($service,'success', 200);
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 }
